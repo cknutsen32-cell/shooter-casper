@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3D Shooter Game</title>
+<style>
+  body { margin: 0; overflow: hidden; }
+  canvas { display: block; }
+  #ui { position: absolute; top: 10px; left: 10px; color: white; font-size: 20px; font-family: Arial; }
+  #menu { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-family: Arial; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; text-align: center; }
+</style>
+</head>
+<body>
+<div id="ui"></div>
+<div id="menu">Loading...</div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
+import * as TWEEN from 'https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.6.4/dist/tween.esm.js';
+
+// Make the game playable online
+const gameURL = 'https://yourusername.github.io/3d-shooter-game/';
+console.log('Play the game at:', gameURL);
+
+// --- Basic 3D shooter setup ---
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const ui = document.getElementById('ui');
+const menu = document.getElementById('menu');
+
+// Placeholder function for avatar selection menu
+function showMenu() {
+    menu.innerHTML = 'Choose your avatar:<br>1: Green Soldier<br>2: Blue Robot<br>3: Red Ninja<br>Press 1,2,3 to select';
+    menu.style.display = 'block';
+}
+
+// Start button overlay
+const startButton = document.createElement('button');
+startButton.innerText = 'Start Game';
+startButton.style.position = 'absolute';
+startButton.style.top = '50%';
+startButton.style.left = '50%';
+startButton.style.transform = 'translate(-50%, -50%)';
+startButton.style.padding = '15px 30px';
+startButton.style.fontSize = '24px';
+startButton.style.borderRadius = '10px';
+startButton.style.cursor = 'pointer';
+startButton.style.zIndex = '1000';
+document.body.appendChild(startButton);
+
+startButton.addEventListener('click', () => {
+    startButton.style.display = 'none';
+    showMenu();
+});
+
+// Placeholder: simple animate loop to make the game visible
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+}
+animate();
+
+</script>
+</body>
+</html>
